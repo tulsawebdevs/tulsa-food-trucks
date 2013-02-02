@@ -4,9 +4,9 @@ tulsa-food-trucks
 requirements
 ------------
 
-*PostgresSql
-*PostGIS
-*Python friendly environment
+* PostgresSql
+* PostGIS
+* Python friendly environment
 
 Installation
 ------------
@@ -16,6 +16,9 @@ Installation
 https://gist.github.com/3188632
 
 **if on OSX 10.8 when installing postgresql**
+
 $ brew install postgresql9 --without-ossp-uuid 
+
 then
+
 $ brew install postgis15

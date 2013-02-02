@@ -11,6 +11,7 @@ MANAGERS = ADMINS
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
+DATABASES = {}
 DATABASES['default'] =  dj_database_url.config()
 
 # Local time zone for this installation. Choices can be found here:

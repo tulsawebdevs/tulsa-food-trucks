@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Patrick Forringer', 'patrick@forringer.com'),
 )
 
 MANAGERS = ADMINS
@@ -112,8 +112,18 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    'django.contrib.admindocs',
+    # 'django.contrib.admindocs',
+    'django_extensions',
+    'emailusernames',
+    'south',
+    'django_nose',  # must come after south to ensure test runner used
+    'trucks',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'emailusernames.backends.EmailAuthBackend',
+)
+AUTH_PROFILE_MODULE = 'trucks.Profile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -143,6 +153,13 @@ LOGGING = {
         },
     }
 }
+
+TWILIO_ACCOUNT = 'override in local_settings'
+TWILIO_TOKEN = 'override in local_settings'
+TWILIO_FROM = 'override in local_settings'
+BASE_URL = 'http://tulsafoodtrucks.com'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 try:
     from setting_local import *

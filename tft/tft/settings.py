@@ -157,7 +157,7 @@ LOGGING = {
 TWILIO_ACCOUNT = 'override in local_settings'
 TWILIO_TOKEN = 'override in local_settings'
 TWILIO_FROM = 'override in local_settings'
-BASE_URL = 'http://tfdd.co'
+BASE_URL = 'http://tulsafoodtrucks.com'
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 

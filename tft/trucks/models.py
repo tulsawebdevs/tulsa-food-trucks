@@ -19,7 +19,11 @@ class Profile(models.Model):
         db_table = 'profile'
 
     def __str__(self):
-        return "%s's profile" % self.user
+        if self.user.first_name and self.user.last_name:
+            return "%s %s's profile" % (self.user.first_name,
+                                        self.user.last_name,)
+        else:
+            return "%s's profile" % self.user
 
     @staticmethod
     def create_user_profile(sender, instance, created, **kwargs):
@@ -34,6 +38,9 @@ class Cuisine(models.Model):
     name = models.CharField(max_length=250)
     slug = AutoSlugField(populate_from='name', overwrite=True)
 
+    def __unicode__(self):
+        return "%s (%s)" % (self.name, self.slug)
+
 
 class Company(models.Model):
     name = models.CharField(max_length=250)
@@ -45,6 +52,10 @@ class Company(models.Model):
     
     class Meta:
         verbose_name_plural = 'Companies'
+        
+    def __unicode__(self):
+        return "%s (%s)" % (self.name, self.slug)
+
 
 class CompanyLink(models.Model):
     company = models.ForeignKey(Company)
@@ -67,6 +78,7 @@ class Employee(models.Model):
     EMPLOYEE = 1
     TITLE_CHOICES = ((OWNER, 'owner'), (EMPLOYEE, 'employee'),)
     title = models.IntegerField(choices=TITLE_CHOICES, default=EMPLOYEE)
+
 
 class Checkin(TimeStampedModel):
     start_time = models.DateTimeField()

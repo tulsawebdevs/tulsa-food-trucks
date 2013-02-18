@@ -119,7 +119,9 @@ INSTALLED_APPS = (
     'django_nose',  # must come after south to ensure test runner used
     'trucks',
     'templates',
+    'waffle',
 )
+
 
 AUTHENTICATION_BACKENDS = (
     'emailusernames.backends.EmailAuthBackend',

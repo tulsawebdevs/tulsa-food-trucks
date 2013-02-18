@@ -9,3 +9,4 @@ ipdb
 ipdbplugin
 django-nose==1.1
 dj-database-url==0.2.1
+django-waffle==0.9.0

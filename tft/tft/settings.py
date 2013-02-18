@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'south',
     'django_nose',  # must come after south to ensure test runner used
     'trucks',
+    'templates',
 )
 
 AUTHENTICATION_BACKENDS = (

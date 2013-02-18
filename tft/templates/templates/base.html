@@ -1,0 +1,27 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>{% block title %}Tulsa Food Trucks{% endblock %}</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head>
+<body>
+    <div class="dispatch_page" data-role="page" >
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar" >
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url logout %}" data-transition="none">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url login %}" data-transition="none" data-prefetch>Login</a></li>
+                    {% endif %}
+                </ul>
+            </div><!-- /navbar -->
+        </div>
+        <div data-role="content">
+            {% block content %}You forgot something&hellip;{% endblock %}
+        </div><!-- /content -->
+    </div>
+</body>
+</html>

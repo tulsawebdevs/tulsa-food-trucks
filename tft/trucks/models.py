@@ -2,6 +2,8 @@ from django_extensions.db.models import TimeStampedModel
 from django_extensions.db.fields import AutoSlugField
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.models import PhoneNumberField
+from django.core.urlresolvers import reverse
+
 
 from django.db import models
 from django.db.models.signals import post_save
@@ -56,9 +58,12 @@ class Company(models.Model):
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.slug)
 
+    def get_detail_url(self):
+        return reverse('company_detail', kwargs={'slug':self.slug})
+
 
 class CompanyLink(models.Model):
-    company = models.ForeignKey(Company)
+    company = models.ForeignKey(Company, related_name='links')
     url = models.URLField()
     TYPE_CHOICES = (('fb', 'facebook'), ('tw', 'twitter'),
                     ('us', 'urban spoon'), ('y', 'yelp'), ('web', 'website'))

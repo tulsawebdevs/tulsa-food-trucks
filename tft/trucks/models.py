@@ -9,33 +9,6 @@ from django.db import models
 from django.db.models.signals import post_save
 
 
-# from tfdd
-class Profile(models.Model):
-    """Additional User data"""
-    user = models.OneToOneField(User)
-    phone = PhoneNumberField()
-    phone_confirmed = models.BooleanField(default=False)
-    email_confirmed = models.BooleanField(default=False)
-
-    class Meta:
-        db_table = 'profile'
-
-    def __str__(self):
-        if self.user.first_name and self.user.last_name:
-            return "%s %s's profile" % (self.user.first_name,
-                                        self.user.last_name,)
-        else:
-            return "%s's profile" % self.user
-
-    @staticmethod
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            profile, created = Profile.objects.get_or_create(user=instance)
-
-
-post_save.connect(Profile.create_user_profile, sender=User)
-
-
 class Cuisine(models.Model):
     name = models.CharField(max_length=250)
     slug = AutoSlugField(populate_from='name', overwrite=True)
@@ -51,10 +24,10 @@ class Company(models.Model):
     cuisine = models.ManyToManyField(Cuisine)
     email = models.EmailField(blank=True)
     phone = PhoneNumberField(blank=True)
-    
+
     class Meta:
         verbose_name_plural = 'Companies'
-        
+
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.slug)
 

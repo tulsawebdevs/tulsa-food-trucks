@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'emailusernames',
     'south',
     'django_nose',  # must come after south to ensure test runner used
+    'accounts',
     'trucks',
     'templates',
     'waffle',

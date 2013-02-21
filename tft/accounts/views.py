@@ -15,12 +15,14 @@ from .models import PhoneVerification, EmailVerification
 
 def login(request):
     return auth_login(
-        request, template_name='login.html',
+        request, template_name='accounts/login.html',
         authentication_form=EmailAuthenticationForm)
 
 
 def logout(request):
-    return auth_logout(request, next_page=reverse('companies'))
+    return auth_logout(
+        request, template_name='accounts/logout.html',
+        next_page=reverse('companies'))
 
 
 def register(request):
@@ -35,7 +37,8 @@ def register(request):
         assert request.method == 'GET'
         form = RegisterForm()
     return render_to_response(
-        'register.html', RequestContext(request, {'form': form}))
+        'accounts/register.html', 
+        RequestContext(request, {'form': form}))
 
 
 # @csrf_exempt
@@ -48,7 +51,8 @@ def register_email(request):
     else:
         form = VerifyEmailForm()
     return render_to_response(
-        'register_email.html', RequestContext(request, {'form': form}))
+        'accounts/register_email.html',
+        RequestContext(request, {'form': form}))
 
 
 # @csrf_exempt
@@ -61,4 +65,5 @@ def register_phone(request):
     else:
         form = VerifyPhoneForm()
     return render_to_response(
-        'register_phone.html', RequestContext(request, {'form': form}))
+        'accounts/register_phone.html',
+        RequestContext(request, {'form': form}))

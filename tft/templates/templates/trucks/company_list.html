@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{% block list_title %}Trucks{% endblock %}</h2>
+    <ul data-role="listview" data-inset="true" data-filter="true">
+        {% for company in companies %}
+            <li><a href="{{company.get_detail_url}}">{{ company.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

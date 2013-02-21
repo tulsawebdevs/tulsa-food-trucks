@@ -2,26 +2,37 @@
 <html>
 <head>
     <title>{% block title %}Tulsa Food Trucks{% endblock %}</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 </head>
 <body>
-    <div class="dispatch_page" data-role="page" >
-        <div data-role="header" data-position="fixed">
-            <div data-role="navbar" >
-                <ul>
+    <div class="{% block page_class %}{% endblock %}" data-role="page" >
+        <div data-role="panel" id="main-panel" data-position="left" data-display="reveal">
+            <div class="ui-panel-inner">
+                <ul data-role="listview">
                     {% if user.is_authenticated %}
-                    <li><a href="{% url logout %}" data-transition="none">Logout</a></li>
+                    <li><a href="{% url logout %}" >Logout</a></li>
                     {% else %}
-                    <li><a href="{% url login %}" data-transition="none" data-prefetch>Login</a></li>
+                    <li><a href="{% url login %}" data-prefetch>Login</a></li>
+                    <li><a href="{% url register %}" data-prefetch>Register</a></li>
                     {% endif %}
+                    <li data-role="list-divider">Trucks by Cusine</li>
+                    {% for cuisine in cuisines %}
+                        <li><a href="{{cuisine.get_list_url}}">{{cuisine.name}}</a></li>
+                    {% endfor %}
                 </ul>
-            </div><!-- /navbar -->
+            </div>
+        </div><!-- /panel -->
+        {% block page_markup %}
+        <div data-role="header" data-position="fixed">
+            <h1 class="ui-title" role="heading" aria-level="1">Food Trucks</h1>
+            <a href="#main-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-btn-left ui-btn ui-btn-corner-all ui-btn-icon-notext ui-btn-up-c" data-corners="true" data-wrapperels="span" data-theme="c" title="Menu"><span class="ui-btn-inner"><span class="ui-btn-text">Menu</span><span class="ui-icon ui-icon-bars">&nbsp;</span></span></a>
         </div>
         <div data-role="content">
             {% block content %}You forgot something&hellip;{% endblock %}
         </div><!-- /content -->
+        {% endblock %}
     </div>
 <script src="{% url wafflejs %}"></script>
 </body>

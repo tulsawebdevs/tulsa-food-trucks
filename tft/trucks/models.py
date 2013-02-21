@@ -15,7 +15,9 @@ class Cuisine(models.Model):
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.slug)
-
+        
+    def get_list_url(self):
+        return reverse('company_cuisine_list', kwargs={'slug':self.slug})
 
 class Company(models.Model):
     name = models.CharField(max_length=250)

@@ -1,8 +1,43 @@
 {% extends "base.html" %}
 
+{% block header_title %}{{company.name}}{% endblock %}
+
 {% block content %}
-<h1>{{company.name}}</h1>
-{% for link in company.links.all %}
-    <a href="{{link.url}}" class="{{link.link_type}}">{{link.link_type}}</a>
-{% endfor %}
+    <div>
+        <p>{{company.description}}</p>
+    </div>
+    {% if company.links.all or company.phone or company.email %}
+    <table id="company-info" class="ui-responsive table-stroke">
+        <thead>
+            <tr>
+                <th data-priority="1">stuff</th>
+                <th>thing</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if company.phone %}
+            <tr>
+                <th>phone:</th>
+                <td>{{company.phone}}</td>
+            </tr>
+        {% endif %}
+        {% if company.email %}
+            <tr>
+                <th>email:</th>
+                <td><a href="mailto:{{company.email}}">{{company.email}}</a></td>
+            </tr>
+        {% endif %}
+        {% if company.links.all %}
+            <tr>
+                <th>social:</th>
+                <td>
+                    {% for link in company.links.all %}
+                    <a href="{{link.url}}" class="{{link.link_type}}">{{link.link_type}}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    {% endif %}
 {% endblock %}

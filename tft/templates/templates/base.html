@@ -26,9 +26,11 @@
         </div><!-- /panel -->
         {% block page_markup %}
         <div data-role="header" data-id="main-header" data-position="fixed">
-            <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Back</a>
+            {% block left_header %}
+                <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Back</a>
+            {% endblock %}
             <h1 class="ui-title" role="heading" aria-level="1">{% block header_title %}Food Trucks{% endblock %}</h1>
-            <a href="#main-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" data-corners="true" data-wrapperels="span" title="Menu"></a>
+            <a href="#main-panel" class="ui-btn-right" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" data-corners="true" data-wrapperels="span" title="Menu"></a>
             {# <a href="/" class="ui-btn-right" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>  #}
         </div>
         <div data-role="content">

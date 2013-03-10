@@ -21,6 +21,7 @@ class CompanyDetail(DetailView):
 
     context_object_name = 'company'
 
+
 class CompanyCuisineList(CompanyList):
     template_name = 'trucks/company_cuisine_list.html'
 
@@ -33,3 +34,10 @@ class CompanyCuisineList(CompanyList):
         context = super(CompanyCuisineList, self).get_context_data(**kwargs)
         context['cuisine'] = self.cuisine
         return context
+
+
+class HomeCompanyList(CompanyList):
+    template_name = 'home.html'
+
+    # def get_queryset(self):
+    #     return self.model.objects.has_active_trucks()

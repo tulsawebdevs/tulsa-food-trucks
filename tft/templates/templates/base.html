@@ -12,10 +12,10 @@
             <div class="ui-panel-inner">
                 <ul data-role="listview">
                     {% if user.is_authenticated %}
-                    <li><a href="{% url logout %}" >Logout</a></li>
+                    <li><a href="{% url 'logout' %}" >Logout</a></li>
                     {% else %}
-                    <li><a href="{% url login %}" data-prefetch>Login</a></li>
-                    <li><a href="{% url register %}" data-prefetch>Register</a></li>
+                    <li><a href="{% url 'login' %}" data-prefetch>Login</a></li>
+                    <li><a href="{% url 'register' %}" data-prefetch>Register</a></li>
                     {% endif %}
                     <li data-role="list-divider">Trucks by Cuisine</li>
                     {% for cuisine in cuisines %}
@@ -38,6 +38,6 @@
         </div><!-- /content -->
         {% endblock %}
     </div>
-<script src="{% url wafflejs %}"></script>
+<script src="{% url 'wafflejs' %}"></script>
 </body>
 </html>

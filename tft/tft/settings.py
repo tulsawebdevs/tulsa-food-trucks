@@ -119,7 +119,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django_extensions',
-    'emailusernames',
     'south',
     'django_nose',  # must come after south to ensure test runner used
     'accounts',
@@ -129,10 +128,10 @@ INSTALLED_APPS = (
 )
 
 
-AUTHENTICATION_BACKENDS = (
-    'emailusernames.backends.EmailAuthBackend',
-)
-AUTH_PROFILE_MODULE = 'trucks.Profile'
+# AUTHENTICATION_BACKENDS = (
+#     'emailusernames.backends.EmailAuthBackend',
+# )
+AUTH_USER_MODEL = 'accounts.User'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

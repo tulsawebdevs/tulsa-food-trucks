@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 # from django.views.decorators.csrf import csrf_exempt
-from emailusernames.forms import EmailAuthenticationForm
+# from emailusernames.forms import EmailAuthenticationForm
 
 from .forms import (RegisterForm, VerifyEmailForm, VerifyPhoneForm)
 
@@ -15,8 +15,7 @@ from .models import PhoneVerification, EmailVerification
 
 def login(request):
     return auth_login(
-        request, template_name='accounts/login.html',
-        authentication_form=EmailAuthenticationForm)
+        request, template_name='accounts/login.html')
 
 
 def logout(request):

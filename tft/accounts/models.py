@@ -99,7 +99,6 @@ class VerificationBase(models.Model):
         code = cls.random_code()
         while cls.objects.filter(code=code).exists():
             code = cls.random_code()
-        from ipdb import set_trace; set_trace()
         obj = cls.objects.create(
             value=value, code=code, sent_at=datetime.now())
         obj.send()

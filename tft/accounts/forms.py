@@ -5,14 +5,8 @@ from django_localflavor_us.forms import USPhoneNumberField
 from .models import EmailVerification, PhoneVerification, User
 
 
-# class AuthenticationForm(forms.Form):
-
-
-# class RegisterForm(forms.ModelForm):
 class RegisterForm(forms.Form):
-    class Meta:
-        model = User
-        
+
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
     email = forms.EmailField()
@@ -53,7 +47,6 @@ class RegisterForm(forms.Form):
         if phone:
             PhoneVerification.create_with_unique_code(phone)
         EmailVerification.create_with_unique_code(email)
-        # user.save()
         return user
 
 

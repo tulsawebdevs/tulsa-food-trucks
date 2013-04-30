@@ -1,6 +1,8 @@
+from datetime import datetime
 import random
 import string
 
+from django.core.urlresolvers import reverse
 from django.conf import settings
 # from django.contrib.auth.models import User
 from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin,
@@ -60,9 +62,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         help_text='User has confirmed their phone number.')
     email_confirmed = models.BooleanField(default=False,
         help_text='User has confirmed their email address.')
-    
+
     objects = UserManager()
-    
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['phone']
 
@@ -97,6 +99,7 @@ class VerificationBase(models.Model):
         code = cls.random_code()
         while cls.objects.filter(code=code).exists():
             code = cls.random_code()
+        from ipdb import set_trace; set_trace()
         obj = cls.objects.create(
             value=value, code=code, sent_at=datetime.now())
         obj.send()
@@ -107,10 +110,11 @@ class PhoneVerification(VerificationBase):
     value = PhoneNumberField()
 
     def send(self):
-        send_msg(
-            self.value,
-            'To verify your phone w/ tfdd.co, please visit %s%s?code=%s .' % (
-                settings.BASE_URL, reverse('register_phone'), self.code))
+        return
+        # send_msg(
+        #     self.value,
+        #     'Verify your phone, visit %s%s?code=%s .' % (
+        #         settings.BASE_URL, reverse('register_phone'), self.code))
 
 
 class EmailVerification(VerificationBase):
@@ -120,5 +124,5 @@ class EmailVerification(VerificationBase):
         send_mail(
             'Registration',
             'To verify your email, please visit %s%s?code=%s .' % (
-                settings.BASE_URL, reverse('register_email'), self.code),
+                settings.BASE_URL, reverse('accounts_register_email'), self.code),
             'no-reply@tulsafoodtrucks.com', [self.value], fail_silently=True)

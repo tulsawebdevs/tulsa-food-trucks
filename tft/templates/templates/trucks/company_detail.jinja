@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.jinja" %}
 
 {% block header_title %}{{company.name}}{% endblock %}
 
@@ -31,7 +31,7 @@
             <tr>
                 <th>social:</th>
                 <td>
-                    {% for link in company.links.all %}
+                    {% for link in company.links.all() %}
                     <a href="{{link.url}}" class="{{link.link_type}}">{{link.link_type}}</a>
                     {% endfor %}
                 </td>

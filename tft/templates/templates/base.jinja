@@ -11,15 +11,15 @@
         <div data-role="panel" id="main-panel" data-position="right" data-display="reveal">
             <div class="ui-panel-inner">
                 <ul data-role="listview">
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}" >Logout</a></li>
+                    {% if user.is_authenticated() %}
+                    <li><a href="{{ url('accounts_logout') }}" >Logout</a></li>
                     {% else %}
-                    <li><a href="{% url 'login' %}" data-prefetch>Login</a></li>
-                    <li><a href="{% url 'register' %}" data-prefetch>Register</a></li>
+                    <li><a href="{{ url('accounts_login') }}" data-prefetch>Login</a></li>
+                    <li><a href="{{ url('accounts_register') }}" data-prefetch>Register</a></li>
                     {% endif %}
                     <li data-role="list-divider">Trucks by Cuisine</li>
                     {% for cuisine in cuisines %}
-                        <li><a href="{{cuisine.get_list_url}}">{{cuisine.name}}</a></li>
+                        <li><a href="{{cuisine.get_list_url()}}">{{cuisine.name}}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -38,6 +38,6 @@
         </div><!-- /content -->
         {% endblock %}
     </div>
-<script src="{% url 'wafflejs' %}"></script>
+<script src="{{ url('wafflejs') }}"></script>
 </body>
 </html>

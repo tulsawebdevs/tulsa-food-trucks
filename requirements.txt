@@ -9,6 +9,8 @@ ipdbplugin
 django-nose==1.1
 dj-database-url==0.2.1
 django-waffle==0.9.1
-#currect local flavor, but not updated for now to support south
+#correct local flavor, but not updated for now to support south
 #git+git://github.com/django/django-localflavor-us.git#egg=django-localflavor-us
 git+git://github.com/ianawilson/django-localflavor-us.git#egg=django-localflavor-us
+django-jinja
+pygments

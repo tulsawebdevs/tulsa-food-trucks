@@ -5,7 +5,7 @@ from .models import Company, Cuisine
 
 
 class CompanyList(ListView):
-    template_name = 'trucks/company_list.html'
+    template_name = 'trucks/company_list.jinja'
 
     model = Company
 
@@ -13,7 +13,7 @@ class CompanyList(ListView):
 
 
 class CompanyDetail(DetailView):
-    template_name = 'trucks/company_detail.html'
+    template_name = 'trucks/company_detail.jinja'
 
     slug_field = 'slug'
 
@@ -23,7 +23,7 @@ class CompanyDetail(DetailView):
 
 
 class CompanyCuisineList(CompanyList):
-    template_name = 'trucks/company_cuisine_list.html'
+    template_name = 'trucks/company_cuisine_list.jinja'
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -37,7 +37,7 @@ class CompanyCuisineList(CompanyList):
 
 
 class HomeCompanyList(CompanyList):
-    template_name = 'home.html'
+    template_name = 'home.jinja'
 
     # def get_queryset(self):
     #     return self.model.objects.has_active_trucks()

@@ -76,9 +76,11 @@ SECRET_KEY = 'jf$gyo)wn7%dmh80wjmm5=y(odyl%#mt*fqfy9er9p62^=3e=7'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.filesystem.Loader',
+    # 'django.template.loaders.app_directories.Loader',
+    # 'django.template.loaders.eggs.Loader',
+    'django_jinja.loaders.AppLoader',
+    'django_jinja.loaders.FileSystemLoader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -119,6 +121,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django_extensions',
+    'django_jinja',
     'south',
     'django_nose',  # must come after south to ensure test runner used
     'accounts',
@@ -128,10 +131,8 @@ INSTALLED_APPS = (
 )
 
 
-# AUTHENTICATION_BACKENDS = (
-#     'emailusernames.backends.EmailAuthBackend',
-# )
 AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = ('accounts.auth.CustomAuth',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

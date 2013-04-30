@@ -1,10 +1,10 @@
-{% extends "trucks/company_list.html" %}
+{% extends "trucks/company_list.jinja" %}
 
 {% block left_header %}{% endblock %}
 {% block header_title %}Tulsa Food Trucks{% endblock %}
 
 {% block content %}
     <h2>Currently active trucks</h2>
-    {{block.super}}
+    {{super()}}
     {% block list_attr %}{% endblock %}
 {% endblock %}

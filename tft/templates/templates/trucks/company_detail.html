@@ -1,8 +1,0 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h1>{{company.name}}</h1>
-{% for link in company.links.all %}
-    <a href="{{link.url}}" class="{{link.link_type}}">{{link.link_type}}</a>
-{% endfor %}
-{% endblock %}

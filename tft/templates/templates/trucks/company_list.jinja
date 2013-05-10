@@ -1,0 +1,11 @@
+{% extends "base.jinja" %}
+
+{% block header_title %}Trucks{% endblock %}
+
+{% block content %}
+    <ul data-role="listview" {% block list_attr %}data-filter="true"{% endblock %}>
+        {% for company in companies %}
+            <li><a href="{{company.get_detail_url()}}">{{ company.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

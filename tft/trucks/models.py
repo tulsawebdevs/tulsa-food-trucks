@@ -1,12 +1,12 @@
 from django_extensions.db.models import TimeStampedModel
 from django_extensions.db.fields import AutoSlugField
-from django.contrib.auth.models import User
-from django.contrib.localflavor.us.models import PhoneNumberField
 from django.core.urlresolvers import reverse
 
-
 from django.db import models
-from django.db.models.signals import post_save
+
+from django_localflavor_us.models import PhoneNumberField
+
+from accounts.models import User
 
 
 class Cuisine(models.Model):
@@ -18,6 +18,7 @@ class Cuisine(models.Model):
         
     def get_list_url(self):
         return reverse('company_cuisine_list', kwargs={'slug':self.slug})
+
 
 class Company(models.Model):
     name = models.CharField(max_length=250)

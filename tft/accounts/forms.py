@@ -1,16 +1,18 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.localflavor.us.forms import USPhoneNumberField
-from .models import EmailVerification, PhoneVerification
+from django.core.urlresolvers import reverse
+
+from django_localflavor_us.forms import USPhoneNumberField
+from .models import EmailVerification, PhoneVerification, User
 
 
 class RegisterForm(forms.Form):
+
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
     email = forms.EmailField()
     phone = USPhoneNumberField(required=False)
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password Again',
+    password2 = forms.CharField(label='Password Confirmation',
                                 widget=forms.PasswordInput)
 
     def clean_email(self):
@@ -19,6 +21,13 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError(
                 'There is already a user with that email.')
         return email
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get('email')
+        if phone and User.objects.filter(phone=phone).exists():
+            raise forms.ValidationError(
+                'There is already a user with that phone number.')
+        return phone
 
     def clean(self):
         password = self.cleaned_data.get('password')
@@ -33,15 +42,12 @@ class RegisterForm(forms.Form):
         email = self.cleaned_data['email']
         phone = self.cleaned_data['phone']
         password = self.cleaned_data['password']
-        user = User.objects.create(
-            first_name=first_name, last_name=last_name, email=email)
-        user.set_password(password)
+        user = User.objects.create_user(email, password=password, phone=phone,
+                                 first_name=first_name, last_name=last_name)
         if phone:
-            user.profile.phone = phone
-            user.profile.save()
             PhoneVerification.create_with_unique_code(phone)
         EmailVerification.create_with_unique_code(email)
-        user.save()
+        return user
 
 
 class VerifyEmailForm(forms.ModelForm):
